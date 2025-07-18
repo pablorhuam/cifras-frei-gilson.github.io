@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cifras do Frei Gilson - Área de Acesso</title>
+    
+    <!-- Meta tags para SEO -->
+    <meta name="description" content="Área de acesso às cifras musicais exclusivas do Frei Gilson.">
+    <meta name="keywords" content="cifras, Frei Gilson, música católica, partituras, cifras religiosas, música cristã">
+    <meta name="author" content="Frei Gilson">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <style>
+        .cifras-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: var(--spacing-lg);
+            background-color: var(--card-background);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .cifras-intro {
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .cifras-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .cifra-item {
+            display: flex;
+            align-items: center;
+            padding: var(--spacing-md);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            margin-bottom: var(--spacing-md);
+            transition: var(--transition);
+        }
+        
+        .cifra-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+        
+        .cifra-icon {
+            font-size: 2rem;
+            margin-right: var(--spacing-md);
+            color: var(--primary-color);
+        }
+        
+        .cifra-info {
+            flex: 1;
+        }
+        
+        .cifra-info h3 {
+            margin-bottom: var(--spacing-xs);
+            color: var(--primary-color);
+        }
+        
+        .cifra-info p {
+            margin-bottom: var(--spacing-xs);
+            color: var(--text-light);
+        }
+        
+        .cifra-download {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .cifra-download:hover {
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+            transform: translateY(-2px);
+        }
+        
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: var(--spacing-lg);
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header class="site-header">
+        <div class="container">
+            <nav class="main-nav">
+                <div class="logo">
+                    <h1>Cifras do Frei Gilson</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Voltar ao Site</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main>
+        <section class="section-cifras">
+            <div class="container">
+                <div class="cifras-container">
+                    <div class="cifras-intro">
+                        <h2>Suas Cifras Exclusivas</h2>
+                        <p>Obrigado por adquirir as cifras do Frei Gilson. Abaixo você encontra todos os arquivos disponíveis para download.</p>
+                    </div>
+                    
+                    <ul class="cifras-list">
+                        <li class="cifra-item">
+                            <div class="cifra-icon">📄</div>
+                            <div class="cifra-info">
+                                <h3>Pescador de Homens</h3>
+                                <p>Cifra completa com acordes para violão e teclado</p>
+                                <p><small>Formato: PDF • Tamanho: 85 KB</small></p>
+                            </div>
+                            <a href="assets/pdfs/Pescador de Homens.pdf" class="cifra-download" download>Download</a>
+                        </li>
+                        <!-- Mais cifras serão adicionadas aqui no futuro -->
+                    </ul>
+                    
+                    <div class="cifras-info">
+                        <h3>Informações Importantes</h3>
+                        <p>• Estas cifras são para uso pessoal e não devem ser redistribuídas.</p>
+                        <p>• Novas cifras serão adicionadas periodicamente. Volte sempre para verificar atualizações.</p>
+                        <p>• Em caso de dúvidas ou problemas com os arquivos, entre em contato pelo email: contato@freigilson.com.br</p>
+                    </div>
+                    
+                    <a href="index.html" class="back-link">Voltar para a página inicial</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>Cifras do Frei Gilson</h3>
+                    <p>Material exclusivo para músicos e entusiastas da música católica.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Frei Gilson - Todos os direitos reservados</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

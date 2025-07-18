@@ -117,7 +117,7 @@ function initCopyPixKey() {
             }, 2000);
             
             // Mostrar mensagem de feedback
-            showMessage('Chave Pix copiada para a área de transferência!', 'success');
+            showMessage('Código Pix copiado para a área de transferência!', 'success');
         });
     }
 }

@@ -1460,6 +1460,22 @@ s para a seção de Pagamento */
     border-radius: 3px;
 }
 
+.qrcode-image {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.qrcode-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
 .qrcode-caption {
     margin-top: var(--spacing-sm);
     font-size: var(--font-size-sm);
