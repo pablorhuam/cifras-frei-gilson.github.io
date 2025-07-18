@@ -374,8 +374,9 @@ function showMessage(message, type = 'info') {
             document.body.removeChild(messageElement);
         }, 300);
     }, 5000);
-}// 
-Função para controlar as abas de prévia do conteúdo
+}
+
+// Função para controlar as abas de prévia do conteúdo
 function initPreviewTabs() {
     const tabButtons = document.querySelectorAll('.tab-button');
     const tabContents = document.querySelectorAll('.tab-content');
@@ -401,8 +402,9 @@ function initPreviewTabs() {
             });
         });
     }
-}// Funç
-ão para controlar o carrossel de depoimentos
+}
+
+// Função para controlar o carrossel de depoimentos
 function initTestimonialsCarousel() {
     const slides = document.querySelectorAll('.testimonial-slide');
     const indicators = document.querySelectorAll('.carousel-indicators .indicator');
@@ -473,13 +475,13 @@ function initTestimonialsCarousel() {
     
     // Inicializar o primeiro slide
     showSlide(0);
-}/
-/ Função para inicializar o contador regressivo
+}
+
+// Função para inicializar o contador regressivo
 function initCountdownTimer() {
     // Definir a data final (7 dias a partir de agora)
     const now = new Date();
-    const endDate = new Date();
-    endDate.setDate(now.getDate() + 7); // 7 dias a partir de hoje
+    const endDate = new Date(now.getTime() + (7 * 24 * 60 * 60 * 1000)); // 7 dias a partir de agora
     
     // Elementos do contador
     const daysElement = document.getElementById('countdown-days');
@@ -493,74 +495,56 @@ function initCountdownTimer() {
     }
     
     // Função para atualizar o contador
-    function updateCountdown() {
+    function tick() {
+        // Obter tempo atual
         const now = new Date();
-        const timeLeft = endDate - now;
         
-        if (timeLeft <= 0) {
+        // Calcular tempo restante
+        const diff = endDate - now;
+        
+        if (diff <= 0) {
             // Tempo esgotado
             daysElement.textContent = '00';
             hoursElement.textContent = '00';
             minutesElement.textContent = '00';
             secondsElement.textContent = '00';
-            
-            if (urgencyMessage) {
-                urgencyMessage.textContent = 'Oferta encerrada! Entre em contato para verificar disponibilidade.';
-                urgencyMessage.style.animation = 'none';
-            }
-            
             return;
         }
         
         // Calcular dias, horas, minutos e segundos
-        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
         
-        // Atualizar elementos com zeros à esquerda
-        daysElement.textContent = days < 10 ? `0${days}` : days;
-        hoursElement.textContent = hours < 10 ? `0${hours}` : hours;
-        minutesElement.textContent = minutes < 10 ? `0${minutes}` : minutes;
-        secondsElement.textContent = seconds < 10 ? `0${seconds}` : seconds;
+        // Atualizar elementos
+        daysElement.textContent = days < 10 ? '0' + days : days;
+        hoursElement.textContent = hours < 10 ? '0' + hours : hours;
+        minutesElement.textContent = minutes < 10 ? '0' + minutes : minutes;
+        secondsElement.textContent = seconds < 10 ? '0' + seconds : seconds;
         
-        // Adicionar animação de piscar quando estiver próximo do fim
+        // Atualizar mensagem de urgência
         if (days === 0 && hours < 12) {
-            if (urgencyMessage) {
-                urgencyMessage.style.animation = 'blink 1s infinite';
-                
-                if (hours < 2) {
-                    urgencyMessage.textContent = 'Últimas horas da oferta! Aproveite agora!';
-                }
+            urgencyMessage.style.animation = 'blink 1s infinite';
+            if (hours < 2) {
+                urgencyMessage.textContent = 'Últimas horas da oferta! Aproveite agora!';
             }
         }
     }
     
-    // Atualizar imediatamente e depois a cada segundo
-    updateCountdown();
-    const countdownInterval = setInterval(updateCountdown, 1000);
+    // Atualizar a cada segundo
+    tick(); // Executar imediatamente
+    setInterval(tick, 1000); // Depois a cada segundo
     
-    // Limpar o intervalo quando a página for fechada
-    window.addEventListener('beforeunload', function() {
-        clearInterval(countdownInterval);
-    });
-    
-    // Adicionar um pouco de aleatoriedade para o número de vagas restantes
-    function updateRemainingSpots() {
+    // Atualizar mensagem de vagas restantes
+    function updateSpots() {
         if (urgencyMessage) {
-            const spots = Math.floor(Math.random() * 5) + 1; // Entre 1 e 5 vagas
+            const spots = Math.floor(Math.random() * 5) + 1;
             urgencyMessage.textContent = `Restam apenas ${spots} vagas disponíveis para este mês!`;
         }
     }
     
-    // Atualizar o número de vagas restantes a cada 30 segundos
-    updateRemainingSpots();
-    const spotsInterval = setInterval(updateRemainingSpots, 30000);
-    
-    // Limpar o intervalo quando a página for fechada
-    window.addEventListener('beforeunload', function() {
-        clearInterval(spotsInterval);
-    });
+    // Atualizar vagas a cada 30 segundos
+    updateSpots();
+    setInterval(updateSpots, 30000);
 }
-
-// Função já inicializada no início do arquivo
