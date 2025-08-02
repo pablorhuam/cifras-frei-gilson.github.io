@@ -132,9 +132,31 @@ function initFormValidation() {
             event.preventDefault();
             
             if (validateForm()) {
-                // Simulação de envio do formulário
-                showMessage('Notificação enviada com sucesso! Você receberá o acesso em breve.', 'success');
-                form.reset();
+                // Envio real do formulário via Formspree
+                const formData = new FormData(form);
+                
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        showMessage('Notificação enviada com sucesso! Você receberá o acesso em breve.', 'success');
+                        form.reset();
+                    } else {
+                        response.json().then(data => {
+                            if (Object.hasOwnProperty.call(data, 'errors')) {
+                                showMessage('Erro ao enviar: ' + data["errors"].map(error => error["message"]).join(", "), 'error');
+                            } else {
+                                showMessage('Erro ao enviar a notificação. Tente novamente.', 'error');
+                            }
+                        });
+                    }
+                }).catch(error => {
+                    showMessage('Erro ao enviar a notificação. Verifique sua conexão e tente novamente.', 'error');
+                });
             }
         });
         

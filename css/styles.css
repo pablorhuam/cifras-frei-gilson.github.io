@@ -342,6 +342,26 @@ footer {
     border-radius: var(--border-radius);
 }
 
+.main-image img {
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.main-image img:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-lg);
+}
+
+.gallery-item img {
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.gallery-item img:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-lg);
+}
+
 /* Content Grid */
 .content-grid {
     display: grid;
@@ -881,6 +901,10 @@ os para a seção Sobre o Frei Gilson */
         margin-bottom: var(--spacing-xs);
         margin-right: 0;
     }
+    
+    .main-image img {
+        height: 250px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -890,6 +914,14 @@ os para a seção Sobre o Frei Gilson */
     
     .highlight-text {
         font-size: var(--font-size-md);
+    }
+    
+    .main-image img {
+        height: 200px;
+    }
+    
+    .gallery-item img {
+        height: 80px;
     }
 }/* Estil
 os para a seção de Conteúdo Exclusivo */
