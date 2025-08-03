@@ -123,57 +123,75 @@ function initCopyPixKey() {
     }
 }
 
-// Função para validação de formulário
+// Função para validação de formulário - VERSÃO SIMPLIFICADA
 function initFormValidation() {
     const form = document.getElementById('paymentNotificationForm');
     
     if (form) {
+        console.log('Formulário encontrado, configurando evento submit...');
+        
+        // Pré-preencher data e hora atual
+        const paymentDateField = document.getElementById('paymentDate');
+        if (paymentDateField) {
+            function updateDateTime() {
+                const now = new Date();
+                // Ajustar para timezone local
+                const localDateTime = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+                paymentDateField.value = localDateTime.toISOString().slice(0, 16);
+            }
+            
+            // Preencher inicialmente
+            updateDateTime();
+            
+            // Adicionar botão para atualizar data/hora se necessário
+            const updateButton = document.createElement('button');
+            updateButton.type = 'button';
+            updateButton.className = 'btn btn-secondary';
+            updateButton.textContent = '🕐 Atualizar para agora';
+            updateButton.onclick = updateDateTime;
+            
+            const inputGroup = paymentDateField.parentNode.querySelector('.datetime-input-group');
+            if (inputGroup) {
+                inputGroup.appendChild(updateButton);
+            }
+        }
+        
         form.addEventListener('submit', function(event) {
             event.preventDefault();
+            console.log('Submit interceptado, processando...');
             
-            if (validateForm()) {
-                // Envio real do formulário via Formspree
-                const formData = new FormData(form);
-                
-                fetch(form.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                }).then(response => {
-                    if (response.ok) {
-                        showMessage('Notificação enviada com sucesso! Você receberá o acesso em breve.', 'success');
-                        form.reset();
-                    } else {
-                        response.json().then(data => {
-                            if (Object.hasOwnProperty.call(data, 'errors')) {
-                                showMessage('Erro ao enviar: ' + data["errors"].map(error => error["message"]).join(", "), 'error');
-                            } else {
-                                showMessage('Erro ao enviar a notificação. Tente novamente.', 'error');
-                            }
-                        });
-                    }
-                }).catch(error => {
-                    showMessage('Erro ao enviar a notificação. Verifique sua conexão e tente novamente.', 'error');
-                });
-            }
+            // Envio direto via Web3Forms (sem validação complexa)
+            const formData = new FormData(form);
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            
+            console.log('Enviando para:', form.action);
+            console.log('Dados:', Object.fromEntries(formData));
+            
+            submitButton.textContent = 'Enviando...';
+            submitButton.disabled = true;
+            
+            fetch(form.action, {
+                method: 'POST',
+                body: formData
+            }).then(response => {
+                console.log('Resposta:', response.status, response.statusText);
+                if (response.ok) {
+                    alert('Sucesso! Email enviado.');
+                    form.reset();
+                } else {
+                    alert('Erro: ' + response.status);
+                }
+            }).catch(error => {
+                console.error('Erro:', error);
+                alert('Erro: ' + error.message);
+            }).finally(() => {
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+            });
         });
-        
-        // Validação em tempo real para campos específicos
-        const emailInput = document.getElementById('email');
-        if (emailInput) {
-            emailInput.addEventListener('blur', function() {
-                validateEmail(this);
-            });
-        }
-        
-        const phoneInput = document.getElementById('phone');
-        if (phoneInput) {
-            phoneInput.addEventListener('input', function() {
-                formatPhoneNumber(this);
-            });
-        }
+    } else {
+        console.error('Formulário não encontrado!');
     }
 }
 

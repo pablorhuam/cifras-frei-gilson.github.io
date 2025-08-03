@@ -866,11 +866,7 @@ os para a seção Sobre o Frei Gilson */
     font-size: var(--font-size-sm);
 }
 
-.image-gallery {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-sm);
-}
+/* Galeria removida - mantendo apenas imagem principal do Frei Gilson */
 
 .image-placeholder.small {
     height: 100px;
@@ -1440,8 +1436,7 @@ os para a seção de Conteúdo Exclusivo */
 }/* Estilo
 s para a seção de Pagamento */
 .section-acesso {
-    background: linear-gradient(rgba(248, 249, 250, 0.95), rgba(248, 249, 250, 0.95)), 
-                url('https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=1200&h=800&fit=crop&crop=center') center/cover;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     padding: var(--spacing-xl) 0;
     position: relative;
 }
@@ -1453,7 +1448,7 @@ s para a seção de Pagamento */
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(255, 255, 255, 0.1);
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23000" opacity="0.02"/><circle cx="75" cy="75" r="1" fill="%23000" opacity="0.02"/><circle cx="50" cy="10" r="1" fill="%23000" opacity="0.02"/><circle cx="10" cy="90" r="1" fill="%23000" opacity="0.02"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
     pointer-events: none;
 }
 
@@ -1996,5 +1991,100 @@ ilos para a seção de Inspiração Musical */
     .section-intro {
         font-size: var(--font-size-md);
         padding: 0 var(--spacing-sm);
+    }
+}/*
+ Estilos para placeholders de inspiração com gradiente */
+.inspiracao-placeholder {
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+}
+
+.inspiracao-placeholder:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Melhorias para as imagens da galeria */
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--border-radius);
+}
+
+.gallery-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(142, 68, 173, 0.1);
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.gallery-item:hover::after {
+    opacity: 1;
+}/* Es
+tilo para botão de atualizar data/hora */
+.form-group button.btn-secondary {
+    background-color: var(--text-light);
+    color: var(--light-text);
+    border: 1px solid var(--border-color);
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    margin-top: 5px;
+    display: block;
+    width: auto;
+}
+
+.form-group button.btn-secondary:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--light-text);
+}/* 
+Estilo para grupo de input de data/hora */
+.datetime-input-group {
+    display: flex;
+    gap: var(--spacing-sm);
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.datetime-input-group input {
+    flex: 1;
+    min-width: 200px;
+}
+
+.datetime-input-group button.btn-secondary {
+    background-color: var(--text-light);
+    color: var(--light-text);
+    border: 1px solid var(--border-color);
+    font-size: 0.75rem;
+    padding: 6px 12px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.datetime-input-group button.btn-secondary:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--light-text);
+    transform: none;
+}
+
+/* Responsividade para o grupo de data/hora */
+@media (max-width: 480px) {
+    .datetime-input-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .datetime-input-group input {
+        min-width: auto;
+    }
+    
+    .datetime-input-group button {
+        margin-top: var(--spacing-xs);
     }
 }

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Web3Forms - Cifras Frei Gilson</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input, select, textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+        button { background: #8e44ad; color: white; padding: 12px 24px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #7d3c98; }
+        button:disabled { background: #bdc3c7; cursor: not-allowed; }
+        .message { padding: 15px; margin: 15px 0; border-radius: 5px; }
+        .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <h1>🎵 Teste do Formulário Web3Forms</h1>
+    <p>Este é um teste para verificar se o Web3Forms está funcionando corretamente com a chave configurada.</p>
+    
+    <form id="testForm" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="e30d5570-f67e-4599-a1de-2ac51e2e611a">
+        <input type="hidden" name="subject" value="🧪 TESTE - Formulário Web3Forms Funcionando">
+        <input type="hidden" name="from_name" value="Teste Site Cifras Frei Gilson">
+        <input type="hidden" name="botcheck" class="hidden" style="display: none;">
+        
+        <div class="form-group">
+            <label for="name">Nome completo</label>
+            <input type="text" id="name" name="name" placeholder="Seu nome para teste" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" placeholder="Seu e-mail" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="paymentValue">Valor do pagamento</label>
+            <input type="text" id="paymentValue" name="paymentValue" value="7,90" readonly>
+        </div>
+        
+        <div class="form-group">
+            <label for="message">Mensagem de teste</label>
+            <textarea id="message" name="message" rows="3" placeholder="Esta é uma mensagem de teste do formulário Web3Forms"></textarea>
+        </div>
+        
+        <button type="submit">Enviar Teste</button>
+    </form>
+    
+    <div id="result"></div>
+    
+    <div style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 5px;">
+        <h3>Informações do Teste:</h3>
+        <ul>
+            <li><strong>Chave Web3Forms:</strong> e30d5570-f67e-4599-a1de-2ac51e2e611a</li>
+            <li><strong>Limite gratuito:</strong> 250 emails/mês</li>
+            <li><strong>Status:</strong> <span id="status">Aguardando teste...</span></li>
+        </ul>
+    </div>
+    
+    <script>
+        document.getElementById('testForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const formData = new FormData(form);
+            const resultDiv = document.getElementById('result');
+            const statusSpan = document.getElementById('status');
+            const submitButton = form.querySelector('button[type="submit"]');
+            
+            // Mostrar carregamento
+            resultDiv.innerHTML = '<div class="message">⏳ Enviando teste...</div>';
+            statusSpan.textContent = 'Enviando...';
+            submitButton.textContent = 'Enviando...';
+            submitButton.disabled = true;
+            
+            fetch(form.action, {
+                method: 'POST',
+                body: formData
+            }).then(response => {
+                if (response.ok) {
+                    resultDiv.innerHTML = '<div class="message success">✅ <strong>SUCESSO!</strong> O Web3Forms está funcionando perfeitamente. Você deve receber um email em breve.</div>';
+                    statusSpan.textContent = 'Funcionando ✅';
+                    statusSpan.style.color = 'green';
+                    form.reset();
+                } else {
+                    resultDiv.innerHTML = '<div class="message error">❌ <strong>ERRO!</strong> Status: ' + response.status + '. Verifique a chave de acesso.</div>';
+                    statusSpan.textContent = 'Erro ❌';
+                    statusSpan.style.color = 'red';
+                }
+            }).catch(error => {
+                resultDiv.innerHTML = '<div class="message error">❌ <strong>ERRO DE CONEXÃO!</strong> ' + error.message + '</div>';
+                statusSpan.textContent = 'Erro de conexão ❌';
+                statusSpan.style.color = 'red';
+            }).finally(() => {
+                submitButton.textContent = 'Enviar Teste';
+                submitButton.disabled = false;
+            });
+        });
+    </script>
+</body>
+</html>
