@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Implementar Imagens - Cifras do Frei Gilson</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .section { margin-bottom: 40px; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
+        .image-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .image-item { text-align: center; padding: 15px; border: 1px solid #eee; border-radius: 5px; }
+        .image-item img { max-width: 100%; height: 150px; object-fit: cover; border-radius: 5px; }
+        .download-btn { background: #007bff; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; display: inline-block; margin-top: 10px; }
+        .download-btn:hover { background: #0056b3; }
+        .code-block { background: #f8f9fa; padding: 15px; border-radius: 5px; font-family: monospace; margin: 10px 0; }
+        .current-placeholder { background: #fff3cd; padding: 10px; border-radius: 5px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>🎵 Implementação de Imagens - Cifras do Frei Gilson</h1>
+    
+    <div class="section">
+        <h2>📸 Galeria do Frei Gilson (2 imagens necessárias)</h2>
+        <div class="current-placeholder">
+            <strong>Placeholders atuais:</strong> "Momento musical" e "Apresentação"
+        </div>
+        
+        <div class="image-grid">
+            <div class="image-item">
+                <h4>Violão em Close</h4>
+                <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=200&fit=crop" alt="Violão">
+                <p>Perfeito para "Momento musical"</p>
+                <a href="https://unsplash.com/photos/brown-acoustic-guitar-beside-white-and-black-piano-tiles-nBJHO6wmRWw" class="download-btn" target="_blank">Ver no Unsplash</a>
+            </div>
+            
+            <div class="image-item">
+                <h4>Mãos Tocando Violão</h4>
+                <img src="https://images.unsplash.com/photo-1516924962500-2b4b3b99ea02?w=300&h=200&fit=crop" alt="Mãos no violão">
+                <p>Ideal para "Apresentação"</p>
+                <a href="https://unsplash.com/photos/person-playing-brown-guitar-ZVprbBmT8QA" class="download-btn" target="_blank">Ver no Unsplash</a>
+            </div>
+        </div>
+        
+        <h3>Código para implementar:</h3>
+        <div class="code-block">
+&lt;div class="gallery-item"&gt;
+    &lt;img src="assets/gallery/guitar-moment.jpg" alt="Momento musical" style="width: 100%; height: 100px; object-fit: cover; border-radius: var(--border-radius);"&gt;
+&lt;/div&gt;
+&lt;div class="gallery-item"&gt;
+    &lt;img src="assets/gallery/presentation.jpg" alt="Apresentação" style="width: 100%; height: 100px; object-fit: cover; border-radius: var(--border-radius);"&gt;
+&lt;/div&gt;
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>👥 Avatares para Depoimentos (4 principais + 4 pequenos)</h2>
+        <div class="current-placeholder">
+            <strong>Placeholders atuais:</strong> MS, JS, AP, RM (grandes) + LF, CR, PL, MF (pequenos)
+        </div>
+        
+        <div class="image-grid">
+            <div class="image-item">
+                <h4>Maria Silva (MS)</h4>
+                <img src="https://images.unsplash.com/photo-1494790108755-2616c0763c5c?w=150&h=150&fit=crop&crop=face" alt="Maria Silva">
+                <p>Coordenadora de Música</p>
+                <a href="https://unsplash.com/photos/woman-wearing-black-scoop-neck-long-sleeved-shirt-rDEOVtE7vOs" class="download-btn" target="_blank">Ver no Unsplash</a>
+            </div>
+            
+            <div class="image-item">
+                <h4>João Santos (JS)</h4>
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="João Santos">
+                <p>Músico</p>
+                <a href="https://unsplash.com/photos/man-in-white-dress-shirt-and-black-blazer-WNoLnJo7tS8" class="download-btn" target="_blank">Ver no Unsplash</a>
+            </div>
+            
+            <div class="image-item">
+                <h4>Ana Paula (AP)</h4>
+                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face" alt="Ana Paula">
+                <p>Regente de Coral</p>
+                <a href="https://unsplash.com/photos/woman-smiling-wearing-denim-jacket-hasaFqhbmVM" class="download-btn" target="_blank">Ver no Unsplash</a>
+            </div>
+            
+            <div class="image-item">
+                <h4>Roberto Mendes (RM)</h4>
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face" alt="Roberto Mendes">
+                <p>Violonista</p>
+                <a href="https://unsplash.com/photos/man-wearing-white-top-in-front-of-woman-wearing-blue-long-sleeved-shirt-Zz5LQe-VSMY" class="download-btn" target="_blank">Ver no Unsplash</a>
+            </div>
+        </div>
+        
+        <h3>Código para implementar avatares:</h3>
+        <div class="code-block">
+&lt;!-- Substituir placeholders por: --&gt;
+&lt;div class="author-image"&gt;
+    &lt;img src="assets/avatars/maria-silva.jpg" alt="Maria Silva" class="avatar"&gt;
+&lt;/div&gt;
+
+&lt;!-- CSS adicional necessário: --&gt;
+.avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: var(--shadow);
+}
+
+.avatar.small {
+    width: 40px;
+    height: 40px;
+}
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>📁 Estrutura de Pastas Sugerida</h2>
+        <div class="code-block">
+assets/
+├── Frei_Gilson.jpg (já existe)
+├── gallery/
+│   ├── guitar-moment.jpg
+│   └── presentation.jpg
+└── avatars/
+    ├── maria-silva.jpg
+    ├── joao-santos.jpg
+    ├── ana-paula.jpg
+    ├── roberto-mendes.jpg
+    ├── luiz-fernando.jpg
+    ├── carla-rodrigues.jpg
+    ├── paulo-lima.jpg
+    └── mariana-ferreira.jpg
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🚀 Passos para Implementação</h2>
+        <ol>
+            <li><strong>Criar pastas:</strong>
+                <div class="code-block">mkdir assets/gallery assets/avatars</div>
+            </li>
+            <li><strong>Baixar imagens:</strong> Clique nos links "Ver no Unsplash" acima e baixe as imagens</li>
+            <li><strong>Renomear arquivos:</strong> Use os nomes sugeridos (ex: maria-silva.jpg)</li>
+            <li><strong>Otimizar imagens:</strong> Redimensione para os tamanhos corretos</li>
+            <li><strong>Atualizar HTML:</strong> Substitua os placeholders pelo código fornecido</li>
+            <li><strong>Testar:</strong> Verifique se todas as imagens carregam corretamente</li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h2>🎨 Alternativas Rápidas</h2>
+        <p>Se preferir uma solução mais rápida, pode usar geradores de avatares:</p>
+        <ul>
+            <li><strong>UI Avatars:</strong> https://ui-avatars.com/api/?name=Maria+Silva&background=8e44ad&color=fff&size=60</li>
+            <li><strong>DiceBear:</strong> https://avatars.dicebear.com/api/personas/maria-silva.svg</li>
+            <li><strong>Gravatar:</strong> Para emails reais dos usuários</li>
+        </ul>
+        
+        <h3>Exemplo com UI Avatars:</h3>
+        <div class="image-grid">
+            <div class="image-item">
+                <img src="https://ui-avatars.com/api/?name=Maria+Silva&background=8e44ad&color=fff&size=60" alt="Avatar MS">
+                <p>Maria Silva</p>
+            </div>
+            <div class="image-item">
+                <img src="https://ui-avatars.com/api/?name=João+Santos&background=3498db&color=fff&size=60" alt="Avatar JS">
+                <p>João Santos</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Adicionar funcionalidade para copiar código
+        document.querySelectorAll('.code-block').forEach(block => {
+            block.addEventListener('click', () => {
+                navigator.clipboard.writeText(block.textContent);
+                block.style.background = '#d4edda';
+                setTimeout(() => {
+                    block.style.background = '#f8f9fa';
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+</html>
