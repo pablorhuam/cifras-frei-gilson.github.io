@@ -5,6 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cifras do Frei Gilson - Área de Acesso</title>
     
+    <script>
+        // Sistema de verificação de token
+        const tokensValidos = [
+            "CIFRAS-EXEMPLO-ABC123", // Token de exemplo para teste
+            // Adicionar novos tokens aqui conforme libera acesso
+        ];
+        
+        function verificarToken() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const token = urlParams.get('token');
+            
+            if (!token) {
+                mostrarAcessoNegado("Token não fornecido. Verifique o link recebido por email.");
+                return false;
+            }
+            
+            if (!tokensValidos.includes(token)) {
+                mostrarAcessoNegado("Token inválido ou expirado. Entre em contato se acredita que isso é um erro.");
+                return false;
+            }
+            
+            // Token válido - registrar acesso
+            console.log('Acesso liberado para token:', token);
+            return true;
+        }
+        
+        function mostrarAcessoNegado(mensagem) {
+            document.addEventListener('DOMContentLoaded', function() {
+                document.body.innerHTML = `
+                    <div style="text-align: center; padding: 50px; font-family: Arial, sans-serif;">
+                        <h2 style="color: #e74c3c;">🔒 Acesso Restrito</h2>
+                        <p style="margin: 20px 0; font-size: 16px;">${mensagem}</p>
+                        <p style="margin: 20px 0;">Para obter acesso, realize o pagamento e aguarde a confirmação por email.</p>
+                        <a href="index.html" style="display: inline-block; padding: 12px 24px; background: #8e44ad; color: white; text-decoration: none; border-radius: 5px; margin-top: 20px;">Voltar ao Site</a>
+                    </div>
+                `;
+            });
+        }
+        
+        // Verificar token ao carregar a página
+        if (!verificarToken()) {
+            // Acesso negado - página será substituída
+        }
+    </script>
+    
     <!-- Meta tags para SEO -->
     <meta name="description" content="Área de acesso às cifras musicais exclusivas do Frei Gilson.">
     <meta name="keywords" content="cifras, Frei Gilson, música católica, partituras, cifras religiosas, música cristã">

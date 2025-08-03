@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔑 Gerador de Tokens - Cifras Frei Gilson</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input, textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px; }
+        button { background: #8e44ad; color: white; padding: 12px 24px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #7d3c98; }
+        .resultado { background: #f8f9fa; padding: 20px; border-radius: 5px; margin-top: 20px; border-left: 4px solid #8e44ad; }
+        .codigo { background: #2c3e50; color: #ecf0f1; padding: 15px; border-radius: 5px; font-family: monospace; margin: 10px 0; }
+        .copy-btn { background: #3498db; padding: 5px 10px; font-size: 12px; margin-left: 10px; }
+        .step { background: #e8f5e8; padding: 15px; margin: 10px 0; border-radius: 5px; border-left: 4px solid #2ecc71; }
+        .warning { background: #fff3cd; padding: 15px; margin: 10px 0; border-radius: 5px; border-left: 4px solid #f39c12; }
+    </style>
+</head>
+<body>
+    <h1>🔑 Gerador de Tokens de Acesso</h1>
+    <p>Use esta ferramenta para gerar tokens únicos para clientes que realizaram o pagamento.</p>
+    
+    <div class="warning">
+        <strong>⚠️ Importante:</strong> Este arquivo deve ser mantido privado. Não compartilhe ou publique no GitHub Pages.
+    </div>
+    
+    <div class="form-group">
+        <label for="nome">Nome do Cliente:</label>
+        <input type="text" id="nome" placeholder="Ex: Maria Silva" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="email">Email do Cliente:</label>
+        <input type="email" id="email" placeholder="Ex: maria@email.com" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="observacoes">Observações (opcional):</label>
+        <input type="text" id="observacoes" placeholder="Ex: Pagamento via PIX - R$ 7,90">
+    </div>
+    
+    <button onclick="gerarToken()">🎯 Gerar Token de Acesso</button>
+    
+    <div id="resultado" style="display: none;" class="resultado">
+        <h3>✅ Token Gerado com Sucesso!</h3>
+        
+        <div class="form-group">
+            <label>🔑 Token Único:</label>
+            <div class="codigo">
+                <span id="token-gerado"></span>
+                <button class="copy-btn" onclick="copiarTexto('token-gerado')">Copiar</button>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label>🔗 Link de Acesso:</label>
+            <div class="codigo">
+                <span id="link-gerado"></span>
+                <button class="copy-btn" onclick="copiarTexto('link-gerado')">Copiar</button>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label>📧 Template de Email:</label>
+            <div class="codigo">
+                <span id="email-template"></span>
+                <button class="copy-btn" onclick="copiarTexto('email-template')">Copiar</button>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label>💻 Código para Adicionar no cifras.html:</label>
+            <div class="codigo">
+                <span id="codigo-adicionar"></span>
+                <button class="copy-btn" onclick="copiarTexto('codigo-adicionar')">Copiar</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="step">
+        <h3>📋 Passos para Liberar Acesso:</h3>
+        <ol>
+            <li><strong>Verificar pagamento</strong> no seu banco/PIX</li>
+            <li><strong>Gerar token</strong> usando este formulário</li>
+            <li><strong>Adicionar token</strong> no arquivo cifras.html (linha dos tokensValidos)</li>
+            <li><strong>Fazer commit</strong> no GitHub para atualizar o site</li>
+            <li><strong>Enviar email</strong> para o cliente com o link de acesso</li>
+        </ol>
+    </div>
+    
+    <div class="step">
+        <h3>🧪 Testar Token:</h3>
+        <p>Após adicionar o token no cifras.html, teste o acesso:</p>
+        <div class="codigo">
+            <a href="cifras.html?token=CIFRAS-EXEMPLO-ABC123" target="_blank">cifras.html?token=CIFRAS-EXEMPLO-ABC123</a>
+        </div>
+    </div>
+
+    <script>
+        function gerarToken() {
+            const nome = document.getElementById('nome').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const observacoes = document.getElementById('observacoes').value.trim();
+            
+            if (!nome || !email) {
+                alert('Por favor, preencha nome e email do cliente.');
+                return;
+            }
+            
+            // Gerar token único
+            const data = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+            const nomeHash = btoa(nome.replace(/\s+/g, '').toUpperCase()).slice(0, 6);
+            const emailHash = btoa(email.split('@')[0]).slice(0, 4);
+            const randomHash = Math.random().toString(36).substring(2, 6).toUpperCase();
+            
+            const token = `CIFRAS-${data}-${nomeHash}${emailHash}${randomHash}`;
+            const link = `cifras.html?token=${token}`;
+            
+            // Preencher resultados
+            document.getElementById('token-gerado').textContent = token;
+            document.getElementById('link-gerado').textContent = link;
+            
+            // Template de email
+            const emailTemplate = `Assunto: ✅ Acesso Liberado - Cifras do Frei Gilson
+
+Olá ${nome},
+
+Seu pagamento foi confirmado com sucesso! 🎉
+
+Acesse suas 10 cifras exclusivas através do link abaixo:
+${window.location.origin}/${link}
+
+📋 O que você vai encontrar:
+• 10 cifras completas do Frei Gilson
+• Arquivos em PDF de alta qualidade
+• Acordes para violão e teclado
+• Indicações de ritmo e dinâmica
+
+⚠️ IMPORTANTE:
+• Este link é pessoal e intransferível
+• Faça o download dos arquivos para seu dispositivo
+• Em caso de dúvidas, responda este email
+
+Que Deus abençoe seu ministério musical! 🎵
+
+Frei Gilson`;
+
+            document.getElementById('email-template').textContent = emailTemplate;
+            
+            // Código para adicionar
+            const codigoAdicionar = `"${token}", // ${nome} - ${email} - ${new Date().toLocaleDateString('pt-BR')}`;
+            document.getElementById('codigo-adicionar').textContent = codigoAdicionar;
+            
+            // Mostrar resultado
+            document.getElementById('resultado').style.display = 'block';
+            document.getElementById('resultado').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function copiarTexto(elementId) {
+            const texto = document.getElementById(elementId).textContent;
+            navigator.clipboard.writeText(texto).then(() => {
+                const btn = event.target;
+                const textoOriginal = btn.textContent;
+                btn.textContent = 'Copiado!';
+                btn.style.background = '#2ecc71';
+                setTimeout(() => {
+                    btn.textContent = textoOriginal;
+                    btn.style.background = '#3498db';
+                }, 2000);
+            });
+        }
+        
+        // Preencher data atual automaticamente
+        document.addEventListener('DOMContentLoaded', function() {
+            // Focar no primeiro campo
+            document.getElementById('nome').focus();
+        });
+    </script>
+</body>
+</html>

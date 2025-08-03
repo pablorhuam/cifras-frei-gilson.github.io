@@ -2087,4 +2087,43 @@ Estilo para grupo de input de data/hora */
     .datetime-input-group button {
         margin-top: var(--spacing-xs);
     }
+}/
+* Barra de progresso para envio de formulário */
+.progress-container {
+    margin: var(--spacing-md) 0;
+    text-align: center;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: var(--border-color);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: var(--spacing-sm);
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    width: 0%;
+    transition: width 0.3s ease;
+    border-radius: 4px;
+}
+
+.progress-text {
+    font-size: var(--font-size-sm);
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+/* Animação da barra de progresso */
+@keyframes progressPulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+.progress-fill {
+    animation: progressPulse 1.5s infinite;
 }

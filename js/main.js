@@ -171,23 +171,62 @@ function initFormValidation() {
             submitButton.textContent = 'Enviando...';
             submitButton.disabled = true;
             
+            // Criar barra de progresso
+            const progressContainer = document.createElement('div');
+            progressContainer.className = 'progress-container';
+            progressContainer.innerHTML = `
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-text">Enviando notificação...</div>
+            `;
+            submitButton.parentNode.insertBefore(progressContainer, submitButton.nextSibling);
+            
+            // Simular progresso
+            const progressFill = progressContainer.querySelector('.progress-fill');
+            const progressText = progressContainer.querySelector('.progress-text');
+            let progress = 0;
+            
+            const progressInterval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress > 90) progress = 90;
+                progressFill.style.width = progress + '%';
+            }, 200);
+            
             fetch(form.action, {
                 method: 'POST',
                 body: formData
             }).then(response => {
+                clearInterval(progressInterval);
+                progressFill.style.width = '100%';
+                
                 console.log('Resposta:', response.status, response.statusText);
                 if (response.ok) {
-                    alert('Sucesso! Email enviado.');
-                    form.reset();
+                    progressText.textContent = '✅ Notificação enviada com sucesso!';
+                    progressText.style.color = 'var(--success-color)';
+                    
+                    setTimeout(() => {
+                        showMessage('Notificação enviada! Você receberá o acesso em breve.', 'success');
+                        form.reset();
+                        setTimeout(() => {
+                            window.location.href = 'obrigado.html';
+                        }, 2000);
+                    }, 1000);
                 } else {
-                    alert('Erro: ' + response.status);
+                    progressText.textContent = '❌ Erro ao enviar. Tente novamente.';
+                    progressText.style.color = 'var(--accent-color)';
                 }
             }).catch(error => {
+                clearInterval(progressInterval);
+                progressText.textContent = '❌ Erro de conexão. Tente novamente.';
+                progressText.style.color = 'var(--accent-color)';
                 console.error('Erro:', error);
-                alert('Erro: ' + error.message);
             }).finally(() => {
-                submitButton.textContent = originalText;
-                submitButton.disabled = false;
+                setTimeout(() => {
+                    progressContainer.remove();
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
+                }, 3000);
             });
         });
     } else {
