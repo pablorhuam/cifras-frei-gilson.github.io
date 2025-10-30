@@ -1,7 +1,7 @@
 /* Variables */
 :root {
     /* Color Scheme - Warm and Inviting for Religious/Musical Theme */
-    --primary-color: #8e44ad;       /* Purple - Main brand color */
+    --primary-color: #3498db;       /* Purple - Main brand color */
     --secondary-color: #3498db;     /* Blue - Secondary color */
     --accent-color: #e74c3c;        /* Red - Call to action */
     --success-color: #2ecc71;       /* Green - Success messages */
@@ -888,7 +888,17 @@ os para a seção Sobre o Frei Gilson */
 .journey-content {
     max-width: 800px;
     margin: 0 auto;
-    text-align: center;
+    text-align: left;
+}
+
+.journey-content ul {
+    margin: var(--spacing-md) 0;
+    padding-left: var(--spacing-lg);
+}
+
+.journey-content li {
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.5;
 }
 
 .journey-content p {
@@ -2126,4 +2136,36 @@ Estilo para grupo de input de data/hora */
 
 .progress-fill {
     animation: progressPulse 1.5s infinite;
+}
+
+/* Estilos para a seção "Por que comprar" */
+.section-why-buy {
+    background-color: var(--light-background);
+    padding: var(--spacing-xl) 0;
+    border-left: 4px solid var(--primary-color);
+}
+
+.why-buy-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.why-buy-content p {
+    font-size: var(--font-size-lg);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-md);
+    color: var(--text-color);
+}
+
+.why-buy-content p:first-child {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    .why-buy-content p {
+        font-size: var(--font-size-md);
+        padding: 0 var(--spacing-sm);
+    }
 }
