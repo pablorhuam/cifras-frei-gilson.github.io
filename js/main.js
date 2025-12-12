@@ -20,9 +20,18 @@ function initMobileMenu() {
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
     const navLinks = document.querySelector('.nav-links');
     
+    console.log('Inicializando menu mobile...', { mobileMenuToggle, navLinks });
+    
     if (mobileMenuToggle && navLinks) {
-        mobileMenuToggle.addEventListener('click', function() {
+        // Garantir que o menu comece fechado
+        navLinks.classList.remove('active');
+        
+        mobileMenuToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('Botão menu clicado');
+            
             navLinks.classList.toggle('active');
+            console.log('Menu ativo:', navLinks.classList.contains('active'));
             
             // Animação do ícone do menu
             const spans = this.querySelectorAll('span');
@@ -41,6 +50,7 @@ function initMobileMenu() {
         const links = navLinks.querySelectorAll('a');
         links.forEach(link => {
             link.addEventListener('click', function() {
+                console.log('Link clicado, fechando menu');
                 navLinks.classList.remove('active');
                 const spans = mobileMenuToggle.querySelectorAll('span');
                 spans[0].style.transform = 'none';
@@ -48,6 +58,22 @@ function initMobileMenu() {
                 spans[2].style.transform = 'none';
             });
         });
+        
+        // Fechar menu ao clicar fora dele
+        document.addEventListener('click', function(e) {
+            if (!mobileMenuToggle.contains(e.target) && !navLinks.contains(e.target)) {
+                if (navLinks.classList.contains('active')) {
+                    console.log('Clicou fora, fechando menu');
+                    navLinks.classList.remove('active');
+                    const spans = mobileMenuToggle.querySelectorAll('span');
+                    spans[0].style.transform = 'none';
+                    spans[1].style.opacity = '1';
+                    spans[2].style.transform = 'none';
+                }
+            }
+        });
+    } else {
+        console.error('Elementos do menu mobile não encontrados!');
     }
 }
 
